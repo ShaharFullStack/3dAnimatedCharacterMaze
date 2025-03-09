@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Game with Animated Character</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="instructions">לחץ על המסך כדי להתחיל</div>
+
+    <!-- ייבוא Three.js ו-FBXLoader -->
+<script type="module" src="monster.js"></script>
+<script>
+    // הוספת אירוע לחיצה על המסך
+    document.addEventListener('click', function() {
+        const instructions = document.getElementById('instructions');
+        
+        // החלפת הטקסט להסבר על המקשים
+        instructions.innerHTML = 
+            'מקשי תנועה: חצים או WASD<br>' +
+            'ריצה: Shift<br>' + 
+            'קפיצה: רווח<br>' +
+            'הפעלת לחצן: E';
+        
+        // הסרת אירוע הלחיצה לאחר הפעלה ראשונה
+        document.removeEventListener('click', arguments.callee);
+        
+        // הגדרת טיימר להעלמת ההודעה לאחר 5 שניות
+        setTimeout(function() {
+            instructions.style.opacity = '0';
+            // הסרת האלמנט מה-DOM לאחר שההנפשה הסתיימה
+            setTimeout(function() {
+                instructions.style.display = 'none';
+            }, 500);
+        }, 5000);
+    });
+</script>
+</body>
+</html>
